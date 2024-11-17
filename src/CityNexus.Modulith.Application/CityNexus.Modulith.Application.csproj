@@ -8,9 +8,11 @@
 
     <ItemGroup>
       <Folder Include="Modules\Contracts\Queries\" />
+      <Folder Include="Modules\People\Queries\" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.1.35" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
       <PackageReference Include="Refit" Version="8.0.0" />
