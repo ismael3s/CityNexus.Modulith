@@ -3,7 +3,12 @@ using System.Text.Json.Serialization;
 using Asp.Versioning;
 using CityNexus.Modulith.Application.Modules.Contracts.Abstractions.ClickSign;
 using CityNexus.Modulith.Application.Modules.Contracts.Extensions;
+using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
 using CityNexus.Modulith.Infra.Options;
+using CityNexus.Modulith.Infra.Persistence.Dapper;
+using CityNexus.Modulith.Infra.Persistence.EF;
+using Dapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
@@ -22,8 +27,22 @@ public static class InfraExtensions
         AddApplicationHealthChecks(services);
         AddCorsPolicy(services);
         AddRefitClients(services, configuration);
+        AddPersistence(services, configuration);
         services.AddContractModule();
         return services;
+    }
+
+    private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString =
+            configuration.GetConnectionString("Default")
+            ?? throw new NullReferenceException("Default connection string is null");
+        SqlMapper.AddTypeHandler(new DateTimeTypeHandler());
+        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+        services.AddDbContext<ApplicationDbContext>(o => o.UseNpgsql(connectionString));
+        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(
+            connectionString
+        ));
     }
 
     private static void ConfigureOptions(IServiceCollection services, IConfiguration configuration)

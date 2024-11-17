@@ -9,18 +9,25 @@
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
         <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+        
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
+        
+        <PackageReference Include="Dapper" Version="2.1.35" />
+
+        <PackageReference Include="EntityFrameworkCore.NamingConventions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
 
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
-
         <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.0.0" />
-
+        
         <PackageReference Include="Refit" Version="8.0.0" />
-
         <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CityNexus.Modulith.Application\CityNexus.Modulith.Application.csproj" />
+      <ProjectReference Include="..\CityNexus.Modulith.Domain\CityNexus.Modulith.Domain.csproj" />
     </ItemGroup>
 </Project>

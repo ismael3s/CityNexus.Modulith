@@ -6,6 +6,11 @@ namespace CityNexus.Modulith.Application.Modules.Contracts.Abstractions.ClickSig
 // Initial Proposal:
 public sealed class Teste<T>
 {
+    public Teste(T data)
+    {
+        Data = data;
+    }
+
     public T Data { get; set; }
 }
 
@@ -27,7 +32,7 @@ public class EnvelopeRequest
 
     public class AttributesSection
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
         public string Locale { get; set; } = "pt-BR";
         public bool AutoClose { get; set; } = true;
         public int RemindInterval { get; set; } = 3;
@@ -39,12 +44,12 @@ public class EnvelopeRequest
 
     public class RelationshipSection
     {
-        public DataSection Data { get; set; }
+        public DataSection Data { get; set; } = default!;
 
         public class DataSection
         {
-            public string Id { get; set; }
-            public string Type { get; set; }
+            public string Id { get; set; } = default!;
+            public string Type { get; set; } = default!;
         }
     }
 }
@@ -106,14 +111,14 @@ public class DocumentRequest
 
     public class AttributesSection
     {
-        public string Filename { get; set; }
-        public Template Template { get; set; }
+        public string Filename { get; set; } = default!;
+        public Template Template { get; set; } = default!;
     }
 
     public record Template
     {
-        public string Key { get; init; }
-        public Dictionary<string, string> Data { get; init; }
+        public string Key { get; init; } = default!;
+        public Dictionary<string, string> Data { get; init; } = default!;
         public Dictionary<string, string>? Metadata { get; init; }
     }
 }
@@ -180,10 +185,10 @@ public class AddSignerRequest(AddSignerRequest.DataSection data)
 public class AddSignerRequestBuilder
 {
     private string _type = "signers";
-    private string _name;
-    private string _email;
+    private string _name = default!;
+    private string _email = default!;
     private int _group = 1;
-    private bool _refusable;
+    private bool _refusable = true;
 
     public AddSignerRequestBuilder WithName(string name)
     {
@@ -266,8 +271,8 @@ public class AddRequirementRequestBuilder
     private string _type = "requirements";
     private string _action = "provide_evidence";
     private string _auth = "email";
-    private string _documentId;
-    private string _signerId;
+    private string _documentId = default!;
+    private string _signerId = default!;
 
     public AddRequirementRequestBuilder WithAction(string action)
     {
@@ -329,30 +334,30 @@ public class AddSignerAuthRoleRequest
 
     public class RequirementsAttributes
     {
-        public string Action { get; set; }
-        public string Role { get; set; }
+        public string Action { get; set; } = default!;
+        public string Role { get; set; } = default!;
     }
 
     public class RequirementsRelationships
     {
-        public DocumentRelationship Document { get; set; }
-        public SignerRelationship Signer { get; set; }
+        public DocumentRelationship Document { get; set; } = default!;
+        public SignerRelationship Signer { get; set; } = default!;
     }
 
     public class DocumentRelationship
     {
-        public RelationshipData Data { get; set; }
+        public RelationshipData Data { get; set; } = default!;
     }
 
     public class SignerRelationship
     {
-        public RelationshipData Data { get; set; }
+        public RelationshipData Data { get; set; } = default!;
     }
 
     public class RelationshipData
     {
-        public string Type { get; set; }
-        public string Id { get; set; }
+        public string Type { get; set; } = default!;
+        public string Id { get; set; } = default!;
     }
 }
 
