@@ -1,10 +1,7 @@
-using System.Net;
 using Asp.Versioning;
 using CityNexus.Modulith.Api;
+using CityNexus.Modulith.Api.Modules.People;
 using CityNexus.Modulith.Application.Modules.Contracts.Commands.CreateAgreementContract;
-using CityNexus.Modulith.Application.Modules.People.Commands.RegisterPerson;
-using CityNexus.Modulith.Application.Modules.People.Queries.FindPeople;
-using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
 using CityNexus.Modulith.Infra;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -34,6 +31,7 @@ var apiVersionSet = app.NewApiVersionSet()
     .Build();
 
 var apiGroup = app.MapGroup("/api").WithApiVersionSet(apiVersionSet);
+PeopleModuleRouting.AddPeopleModuleRoutes(apiGroup);
 
 apiGroup.MapHealthChecks(
     "/healthz",
@@ -47,44 +45,6 @@ apiGroup.MapGet(
         await handler.Handle(ct);
     }
 );
-
-apiGroup.MapPost(
-    "/people",
-    async (
-        RegisterPersonCommandHandler.Input input,
-        CancellationToken ct,
-        RegisterPersonCommandHandler handler
-    ) =>
-    {
-        await handler.Handle(input, ct);
-        return Results.NoContent();
-    }
-)
-.WithDescription("Register a person into the nexus")
-.WithTags("People")
-.Produces(StatusCodes.Status204NoContent)
-.ProducesProblem(StatusCodes.Status400BadRequest)
-    ;
-
-apiGroup.MapGet(
-    "/people",
-    async (
-     
-        FindPeopleQueryHandler handler,
-        CancellationToken ct,
-        int page = 1,
-        int size = 10
-    ) =>
-    {
-        var result = await handler.Handle(new FindPeopleQueryHandler.Input(page, size), ct);
-        return Results.Ok(result);
-    }
-)
-.WithDescription("Search for people")
-.WithTags("People")
-.Produces<Pagination<FindPeopleQueryHandler.Output>>(StatusCodes.Status200OK)
-;
-    
 
 app.UseCors();
 app.Run();

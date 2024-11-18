@@ -33,3 +33,9 @@ Content-Type: application/json
   "email": "{{$.clients..email}}",
   "document": "{{$.clients..document}}"
 }
+###
+
+GET {{Api_HostAddress}}/api/people
+Content-Type: application/json
+
+###

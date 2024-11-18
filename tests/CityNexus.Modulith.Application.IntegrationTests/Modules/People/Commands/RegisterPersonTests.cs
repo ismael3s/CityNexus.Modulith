@@ -49,7 +49,7 @@ public sealed class RegisterPersonTests(IntegrationTestSetup setup) : IAsyncLife
     {
         var (sut, _) = await MakeSut();
 
-        var input = new RegisterPersonCommandHandler.Input(
+        var input = new RegisterPersonCommand(
             "Ismael Souza",
             "ismael@gmail.com",
             null!
@@ -72,7 +72,7 @@ public sealed class RegisterPersonTests(IntegrationTestSetup setup) : IAsyncLife
         applicationDbContext.People.Add(person);
         await applicationDbContext.SaveChangesAsync();
 
-        var input = new RegisterPersonCommandHandler.Input(
+        var input = new RegisterPersonCommand(
             "Ismael Souza",
             "ismael@gmail.com",
             "57075723090"
@@ -94,7 +94,7 @@ public sealed class RegisterPersonTests(IntegrationTestSetup setup) : IAsyncLife
         var person = Person.Create("Ismael Souza", "ismael@gmail.com", "57075723090");
         applicationDbContext.People.Add(person);
         await applicationDbContext.SaveChangesAsync();
-        var input = new RegisterPersonCommandHandler.Input(
+        var input = new RegisterPersonCommand(
             "Ismael Souza",
             "ismael@gmail.com",
             "35381884087"
@@ -113,7 +113,7 @@ public sealed class RegisterPersonTests(IntegrationTestSetup setup) : IAsyncLife
     public async Task ShouldBeAbleToRegisterAPersonIntoTheNexus()
     {
         var (sut, applicationDbContext) = await MakeSut();
-        var input = new RegisterPersonCommandHandler.Input(
+        var input = new RegisterPersonCommand(
             "Ismael Souza",
             "ismael@gmail.com",
             "57075723090"

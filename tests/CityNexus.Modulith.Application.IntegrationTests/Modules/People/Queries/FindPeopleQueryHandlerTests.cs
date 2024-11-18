@@ -40,7 +40,7 @@ public sealed class FindPeopleQueryHandlerTests(IntegrationTestSetup setup) : IA
     {
         var (sut, _) = await MakeSut();
 
-        var results = await sut.Handle(new FindPeopleQueryHandler.Input(), CancellationToken.None);
+        var results = await sut.Handle(new FindPeopleQuery(), CancellationToken.None);
 
         results.Items.Should().BeEmpty();
     }
@@ -54,7 +54,7 @@ public sealed class FindPeopleQueryHandlerTests(IntegrationTestSetup setup) : IA
         applicationDbContext.People.Add(people);
         await applicationDbContext.SaveChangesAsync();
 
-        var results = await sut.Handle(new FindPeopleQueryHandler.Input(), CancellationToken.None);
+        var results = await sut.Handle(new FindPeopleQuery(), CancellationToken.None);
 
         results.Items.Should().HaveCount(1);
         results.Items.First().Id.Should().Be(people.Id);

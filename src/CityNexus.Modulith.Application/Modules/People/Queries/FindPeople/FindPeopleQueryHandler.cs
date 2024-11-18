@@ -1,12 +1,12 @@
 using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
 using Dapper;
+using MediatR;
 
 namespace CityNexus.Modulith.Application.Modules.People.Queries.FindPeople;
 
-public sealed class FindPeopleQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
+public sealed record FindPeopleQuery(int Page = 1, int PageSize = 10): IRequest<Pagination<FindPeopleQueryHandler.Output>>;
+public sealed class FindPeopleQueryHandler(ISqlConnectionFactory sqlConnectionFactory) : IRequestHandler<FindPeopleQuery, Pagination<FindPeopleQueryHandler.Output>>
 {
-    public sealed record Input(int PageNumber = 1, int PageSize = 10);
-
     public sealed class Output
     {
         public Guid Id { get; init; }
@@ -19,12 +19,12 @@ public sealed class FindPeopleQueryHandler(ISqlConnectionFactory sqlConnectionFa
     }
 
     public async Task<Pagination<Output>> Handle(
-        Input input,
+        FindPeopleQuery input,
         CancellationToken cancellationToken = default
     )
     {
         using var connection = sqlConnectionFactory.CreateConnection();
-        var skip = (input.PageNumber - 1) * input.PageSize;
+        var skip = (input.Page - 1) * input.PageSize;
         var take = input.PageSize > 50 ? 50 : input.PageSize;
         var query = $"""
             SELECT
@@ -48,6 +48,7 @@ public sealed class FindPeopleQueryHandler(ISqlConnectionFactory sqlConnectionFa
                 cancellationToken: cancellationToken
             )
         );
-        return Pagination<Output>.Create(0, input.PageNumber, take, result.ToList());
+        return Pagination<Output>.Create(Math.Abs(count / input.PageSize), input.PageSize, take, result.ToList() );
     }
+
 }

@@ -37,7 +37,9 @@ public static class InfraExtensions
         AddPersistence(services, configuration);
         AddBackgroundJobs(services, configuration);
         AddMassTransit(services, configuration);
-        return services.AddContractModule().AddPeopleModule();
+        return services
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PeopleModuleExtension).Assembly))
+            .AddContractModule().AddPeopleModule();
     }
 
     private static void AddBackgroundJobs(IServiceCollection services, IConfiguration configuration)

@@ -2,6 +2,7 @@ using CityNexus.Modulith.Application.Modules.People.Repositories;
 using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
 using CityNexus.Modulith.Domain.Modules.People;
 using CityNexus.Modulith.Domain.Modules.Shared.Exceptions;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace CityNexus.Modulith.Application.Modules.People.Commands.RegisterPerson;
@@ -10,13 +11,11 @@ public sealed class RegisterPersonCommandHandler(
     IPersonRepository personRepository,
     IUnitOfWork unitOfWork,
     ILogger<RegisterPersonCommandHandler> logger
-)
+) : IRequestHandler<RegisterPersonCommand>
 {
-    public sealed record Input(string Name, string Email, string Document);
-
-    public async Task Handle(Input input, CancellationToken cancellationToken = default!)
+    public async Task Handle(RegisterPersonCommand registerPersonCommand, CancellationToken cancellationToken = default!)
     {
-        var person = Person.Create(input.Name, input.Email, input.Document);
+        var person = Person.Create(registerPersonCommand.Name, registerPersonCommand.Email, registerPersonCommand.Document);
         var personByDocument = await personRepository.FindByCpf(person.Document, cancellationToken);
         if (personByDocument is not null)
             throw new AppException("CPF is already in use");
