@@ -29,12 +29,12 @@ public static class PeopleModuleRouting
         group.MapPost(
                 "/",
                 async (
-                    RegisterPersonCommand input,
+                    RegisterPersonDto input,
                     ISender sender,
                     CancellationToken ct
                 ) =>
                 {
-                    await sender.Send(input, ct);
+                    await sender.Send(new RegisterPersonCommand(Name: input.Name, Email: input.Email, Document: input.Document), ct);
                     return Results.NoContent();
                 }
             )
@@ -43,6 +43,4 @@ public static class PeopleModuleRouting
             .ProducesProblem(StatusCodes.Status400BadRequest)
             ;
     }
-
-    
 }
