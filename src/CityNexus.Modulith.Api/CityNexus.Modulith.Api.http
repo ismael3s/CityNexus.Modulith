@@ -6,3 +6,30 @@ Accept: application/json
 ###
 
 
+
+< {%
+    request.variables.set("clients", [ // test data
+        { "name": "Maria Ate", "email": "maria@example.com", "document": "77626736010" },
+        { "name": "Lucas Ate", "email": "lucas@example.com", "document": "08305030059" },
+        { "name": "Ate Ana", "email": "ana@example.com", "document": "56181549005" },
+        { "name": "Ate Pedro", "email": "pedro@example.com", "document": "20148208053" },
+        { "name": "Ate Carlos", "email": "carlos@example.com", "document": "94653367000" },
+        { "name": "Ate Gabriela", "email": "gabriela@example.com", "document": "30174553005" },
+        { "name": "Ate Juliana", "email": "juliana@example.com", "document": "13503303022" },
+        { "name": "Ate Felipe", "email": "felipe@example.com", "document": "06511281027" },
+        { "name": "Ate Beatriz", "email": "beatriz@example.com", "document": "09792566074" },
+        { "name": "Ate Raul", "email": "raul@example.com", "document": "14266129076" },
+        { "name": "Ate Isabela", "email": "isabela@example.com", "document": "65194311095" },
+        { "name": "Ate Gustavo", "email": "gustavo@example.com", "document": "45446805062" },
+        { "name": "Ate Ricardo", "email": "ricardo@example.com", "document": "67377848014" },
+    ])
+%}
+
+POST {{Api_HostAddress}}/api/people
+Content-Type: application/json
+
+{
+  "name": "{{$.clients..name}}",
+  "email": "{{$.clients..email}}",
+  "document": "{{$.clients..document}}"
+}
