@@ -1,3 +1,5 @@
+using CityNexus.Modulith.Domain.Modules.Shared.Exceptions;
+
 namespace CityNexus.Modulith.Domain.Modules.Shared.VO;
 
 public sealed record Name(string Value)
@@ -9,7 +11,7 @@ public sealed record Name(string Value)
         var results = value.Split(" ").Select(n => $"{n[0].ToString().ToUpper()}{n[1..]}").ToList();
         if (results.Count < 2)
         {
-            throw new Exception($"The name must have at least 2 words.");
+            throw new AppException($"The name must have at least 2 words.");
         }
         return new Name(string.Join(' ', results));
     }

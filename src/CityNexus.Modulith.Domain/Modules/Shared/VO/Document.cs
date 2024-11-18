@@ -1,3 +1,5 @@
+using CityNexus.Modulith.Domain.Modules.Shared.Exceptions;
+
 namespace CityNexus.Modulith.Domain.Modules.Shared.VO;
 
 public enum DocumentType
@@ -11,7 +13,7 @@ public sealed record Document(string Value)
     {
         if (!IsAValidCpf(value))
         {
-            throw new Exception("The CPF is invalid");
+            throw new AppException("The CPF is invalid");
         }
         var document = new Document(value.Trim().Replace(".", "").Replace("-", ""));
         return document;

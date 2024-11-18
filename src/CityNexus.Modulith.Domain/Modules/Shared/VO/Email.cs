@@ -1,4 +1,5 @@
 using System.Net.Mail;
+using CityNexus.Modulith.Domain.Modules.Shared.Exceptions;
 
 namespace CityNexus.Modulith.Domain.Modules.Shared.VO;
 
@@ -16,7 +17,7 @@ public sealed record Email(string Value)
         }
         catch
         {
-            throw new Exception("Invalid email address.");
+            throw new AppException("Invalid email address.");
         }
     }
 };
