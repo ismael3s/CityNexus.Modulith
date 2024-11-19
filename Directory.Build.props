@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(MSBuildProjectDirectory.Contains('tests'))">
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>
