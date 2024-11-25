@@ -1,6 +1,6 @@
-using CityNexus.Modulith.Application.Modules.People.Commands.RegisterPerson;
-using CityNexus.Modulith.Application.Modules.People.Queries.FindPeople;
-using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
+using CityNexus.Modulith.People.Application.Commands.RegisterPerson;
+using CityNexus.Modulith.People.Application.Queries.FindPeople;
+using CityNexus.Modulith.SharedKernel.Abstractions;
 using MediatR;
 
 namespace CityNexus.Modulith.Api.Modules.People;

@@ -1,6 +1,5 @@
 using System.Data;
-using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
-using CityNexus.Modulith.Domain.Modules.Shared.Abstractions;
+using CityNexus.Modulith.SharedKernel.Abstractions;
 using Dapper;
 using MassTransit;
 using Microsoft.Extensions.Logging;

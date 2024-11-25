@@ -1,4 +1,4 @@
-using CityNexus.Modulith.Domain.Modules.Shared.Exceptions;
+using CityNexus.Modulith.SharedKernel.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 

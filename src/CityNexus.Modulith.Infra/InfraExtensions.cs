@@ -1,19 +1,12 @@
 ﻿using System.Text.Json;
 using Asp.Versioning;
-using CityNexus.Modulith.Application.Modules.Contracts.Abstractions.ClickSign;
-using CityNexus.Modulith.Application.Modules.Contracts.Extensions;
-using CityNexus.Modulith.Application.Modules.People.Extensions;
-using CityNexus.Modulith.Application.Modules.People.Repositories;
-using CityNexus.Modulith.Application.Modules.Shared.Abstractions;
-using CityNexus.Modulith.Domain.Modules.People.Events;
+using CityNexus.Modulith.Contracts.Contracts.Abstractions.ClickSign;
+using CityNexus.Modulith.Contracts.Contracts.Extensions;
 using CityNexus.Modulith.Infra.Options;
-using CityNexus.Modulith.Infra.Persistence.Dapper;
-using CityNexus.Modulith.Infra.Persistence.EF;
-using CityNexus.Modulith.Infra.Persistence.EF.Repositories;
 using CityNexus.Modulith.Infra.Persistence.OutboxMessage;
-using Dapper;
+using CityNexus.Modulith.People.Domain.Entities.People.Events;
+using CityNexus.Modulith.People.Infra.Extensions;
 using MassTransit;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
@@ -34,12 +27,14 @@ public static class InfraExtensions
         AddApplicationHealthChecks(services);
         AddCorsPolicy(services);
         AddRefitClients(services, configuration);
-        AddPersistence(services, configuration);
+        // AddPersistence(services, configuration);
         AddBackgroundJobs(services, configuration);
         AddMassTransit(services, configuration);
+        
         return services
             .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PeopleModuleExtension).Assembly))
-            .AddContractModule().AddPeopleModule();
+            .AddContractModule().AddPeopleModule(configuration)
+            ;
     }
 
     private static void AddBackgroundJobs(IServiceCollection services, IConfiguration configuration)
@@ -49,22 +44,7 @@ public static class InfraExtensions
             .AddQuartzHostedService(opt => opt.WaitForJobsToComplete = true)
             .ConfigureOptions<ProcessOutboxJobSetup>();
     }
-
-    private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
-    {
-        var connectionString =
-            configuration.GetConnectionString("Default")
-            ?? throw new NullReferenceException("Default connection string is null");
-        SqlMapper.AddTypeHandler(new DateTimeTypeHandler());
-        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-        services.AddDbContext<ApplicationDbContext>(o => o.UseNpgsql(connectionString));
-        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(
-            connectionString
-        ));
-        services.AddScoped<IPersonRepository, EfPersonRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-    }
-
+    
     private static void ConfigureOptions(IServiceCollection services, IConfiguration configuration)
     {
         services

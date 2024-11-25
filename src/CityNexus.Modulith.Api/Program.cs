@@ -3,6 +3,7 @@ using CityNexus.Modulith.Api;
 using CityNexus.Modulith.Api.Modules.People;
 using CityNexus.Modulith.Application.Modules.Contracts.Commands.CreateAgreementContract;
 using CityNexus.Modulith.Infra;
+using CityNexus.Modulith.People.Infra.Extensions;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Scalar.AspNetCore;
@@ -11,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi()
     .AddInfrastructure(builder.Configuration)
+    .AddPeopleModule(builder.Configuration)
     .AddExceptionHandler<GlobalExceptionHandler>()
     .AddProblemDetails();
 

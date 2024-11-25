@@ -12,5 +12,14 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AServiceProvider_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003Fce37be1a06b16c6faa02038d2cc477dd3bca5b217ceeb41c5f2ad45c1bf9_003FServiceProvider_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATask_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F62c944bd1ce5cdba36749b2bb2c97e8763ad8a838ecacc9646a9e6c98a7e6c22_003FTask_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0b0235f5_002Dd29e_002D4e47_002Da77c_002D753ba2a81b69/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;tests&amp;gt;\&amp;lt;CityNexus.Modulith.Domain.UnitTests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Project Location="/home/i3s/SideProjects/CityNexus/CityNexus.Modulith/tests/CityNexus.Modulith.Domain.UnitTests" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;CityNexus.Modulith.Domain.UnitTests&amp;gt;" /&gt;
+  &lt;Or&gt;
+    &lt;Project Location="/home/i3s/SideProjects/CityNexus/CityNexus.Modulith/tests/CityNexus.Modulith.Domain.UnitTests" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;CityNexus.Modulith.Domain.UnitTests&amp;gt;" /&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;xUnit::02E21E52-FAAD-4BD5-8D31-131AB60D283C::net9.0::CityNexus.Modulith.SharedKernel.UnitTests.VO.DocumentTests&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::02E21E52-FAAD-4BD5-8D31-131AB60D283C::net9.0::CityNexus.Modulith.SharedKernel.UnitTests.VO.EmailTests&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::45FFF435-0CD3-4868-9506-DD1D09F05441::net9.0::CityNexus.Modulith.People.UnitTests.Domain.Entities.PersonTests&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::AD23520E-0904-45EA-89B6-3E24373F5354::net9.0::CityNexus.Modulith.People.IntegrationTests.People.Commands.RegisterPersonTests&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::AD23520E-0904-45EA-89B6-3E24373F5354::net9.0::CityNexus.Modulith.People.IntegrationTests.People.Queries.FindPeopleQueryHandlerTests&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+  &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

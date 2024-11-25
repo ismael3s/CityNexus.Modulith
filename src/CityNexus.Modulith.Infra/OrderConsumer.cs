@@ -1,4 +1,4 @@
-using CityNexus.Modulith.Domain.Modules.People.Events;
+using CityNexus.Modulith.People.Domain.Entities.People.Events;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
